@@ -41,9 +41,9 @@ public class RootControler {
         List<Cliente> listaClientes = query.list();
         session.getTransaction().commit();
         
-        model.put("mensaje", "Contenido del mensaje");
+        model.put("mensaje", "Lista de Clientes");
         model.put("listaClientes", listaClientes);
-        viewName = "holaHibernate";
+        viewName = "listaClientes";
 
         return new ModelAndView(viewName, model);
     }
@@ -64,7 +64,7 @@ public class RootControler {
         
         model.put("mensaje", "Contenido del mensaje");
         model.put("listaClientes", listaClientes);
-        viewName = "listaClientes";
+        viewName = "holaHibernate";
 
         return new ModelAndView(viewName, model);
     }
