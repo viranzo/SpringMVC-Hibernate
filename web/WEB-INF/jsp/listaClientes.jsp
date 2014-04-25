@@ -13,16 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>hola JSTL</title>
-        <style type="text/css">
-            h1 { text-align: center; color: #385e98;}
-            table { width: 80%;margin: 0 auto;border: 1px solid #009999; border-radius: 4px;}
-            td {padding: 0 5px;}
-            th{  background-color: #0066ff; color: #fff;}
-            tr:nth-child(odd) {  background-color: #def;}
-            tr:nth-child(even) {  background-color: #fff;}
-            .num{ text-align: right;}
-        </style>
-
+        <link href="css/estilos.css" rel="stylesheet">
     </head>
     <body>
         <h1>${mensaje}</h1>
