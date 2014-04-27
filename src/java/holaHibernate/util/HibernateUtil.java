@@ -15,7 +15,7 @@ public class HibernateUtil {
         if (sessionFactory == null) {
             Configuration configuration = new Configuration();
             configuration.configure();
-            //configuration.setProperty("hibernate.current_session_context_class", "thread");
+            configuration.setProperty("hibernate.current_session_context_class", "thread");
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }

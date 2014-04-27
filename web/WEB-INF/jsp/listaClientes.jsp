@@ -12,28 +12,36 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>hola JSTL</title>
+        <title>Lista de clientes utilizando EL y JSTL</title>
         <link href="css/estilos.css" rel="stylesheet">
     </head>
     <body>
-        <h1>${mensaje}</h1>
-        <table>
-            <tr>
-                <th>dni</th>
-                <th>nombre</th>
-                <th>ape1</th>
-                <th>ape2</th>
-                <th>nick</th>
-            </tr>
-            <c:forEach items="${listaClientes}" var="cli">
+        <div class="wrapper">
+            <h1>Listado de clientes</h1>
+            <div >
+               <a id="btnNuevo" href="Cliente/Nuevo.html">Nuevo Cliente</a>
+            </div>
+            <table>
                 <tr>
-                    <td class="num"><c:out value="${cli.dni}" /></td>
-                    <td><c:out value="${cli.nombre}"/></td>
-                    <td><c:out value="${cli.ape1}"/></td>
-                    <td><c:out value="${cli.ape2}"/></td>
-                    <td><c:out value="${cli.nick}"/></td>
+                    <th>dni</th>
+                    <th>nombre</th>
+                    <th>ape1</th>
+                    <th>ape2</th>
+                    <th>nick</th>
                 </tr>
-            </c:forEach>
-        </table>        
+                <c:forEach items="${listaClientes}" var="cli">
+                    <tr>
+                        <td class="num">
+                            <a href="${pageContext.request.contextPath}/Cliente/Editar.html?dni=${cli.dni}" 
+                               />${cli.dni}</a>   
+                        </td>
+                        <td>${cli.nombre}</td>
+                        <td>${cli.ape1}</td>
+                        <td>${cli.ape2}</td>
+                        <td>${cli.nick}</td>
+                    </tr>
+                </c:forEach>
+            </table>       
+        </div>
     </body>
 </html>

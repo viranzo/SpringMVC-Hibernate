@@ -2,11 +2,35 @@
     Created on : 26-abr-2014, 0:28:10
     Author     : Vicente
 */
-
+.wrapper{width: 80%; margin: auto;}
 h1 { text-align: center; color: #385e98;}
-table { width: 80%;margin: 0 auto;border: 1px solid #009999; border-radius: 4px;}
+table { width: 100%;border: 1px solid #009999; border-radius: 4px;}
 td {padding: 0 5px;}
 th{  background-color: #0066ff; color: #fff;}
 tr:nth-child(odd) {  background-color: #def;}
 tr:nth-child(even) {  background-color: #fff;}
 .num{ text-align: right;}
+
+/* para el formulario de clientes */
+form { width: 400px; 
+       border: 1px solid #0066ff; 
+       border-radius: 5px;
+       padding: 10px;
+       margin: 0 auto;
+}
+p.titulo { background: #0066ff; color: #fff;
+  margin: -10px -10px 12px;
+  padding: 2px 5px;
+}
+label { width: 30%; display: inline-block;}
+input[type="text"] { width: 65%;}
+.botones {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #0066ff;
+    text-align: right;
+}
+.disabled{
+    background-color: #cccccc;
+}
+.error p { color: red;}

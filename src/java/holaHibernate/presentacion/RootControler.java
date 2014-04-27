@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,13 +29,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RootControler {
     
+    @Autowired
+    SessionFactory sessionFactory;
+    
     @RequestMapping({"/index.html"})
-    public ModelAndView listaClientes1(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView listaClientes(HttpServletRequest request, HttpServletResponse response) {
         
         Map<String, Object> model = new HashMap<String, Object>();
         String viewName;
         
-        SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
+        //SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
         Session session=sessionFactory.openSession();
         
         session.beginTransaction();
@@ -41,7 +46,7 @@ public class RootControler {
         List<Cliente> listaClientes = query.list();
         session.getTransaction().commit();
         
-        model.put("mensaje", "Lista de Clientes");
+        model.put("mensaje", "ok");
         model.put("listaClientes", listaClientes);
         viewName = "listaClientes";
 
@@ -54,7 +59,7 @@ public class RootControler {
         Map<String, Object> model = new HashMap<String, Object>();
         String viewName;
         
-        SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
+        //SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
         Session session=sessionFactory.openSession();
         
         session.beginTransaction();
