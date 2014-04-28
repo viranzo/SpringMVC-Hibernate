@@ -7,7 +7,6 @@
 package holaHibernate.presentacion;
 
 import holaHibernate.entidades.Cliente;
-import holaHibernate.util.HibernateUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +33,7 @@ public class RootControler {
     @RequestMapping({"/index.html"})
     public ModelAndView listaClientes(HttpServletRequest request, HttpServletResponse response) {
         
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         String viewName;
         
         //SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
@@ -46,30 +44,9 @@ public class RootControler {
         List<Cliente> listaClientes = query.list();
         session.getTransaction().commit();
         
-        model.put("mensaje", "ok");
+        //model.put("mensaje", "ok");
         model.put("listaClientes", listaClientes);
         viewName = "listaClientes";
-
-        return new ModelAndView(viewName, model);
-    }
-    
-    @RequestMapping({"/listaClientes2.html"})
-    public ModelAndView listaClientes2(HttpServletRequest request, HttpServletResponse response) {
-        
-        Map<String, Object> model = new HashMap<String, Object>();
-        String viewName;
-        
-        //SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
-        Session session=sessionFactory.openSession();
-        
-        session.beginTransaction();
-        Query query = session.createQuery("FROM Cliente");
-        List<Cliente> listaClientes = query.list();
-        session.getTransaction().commit();
-        
-        model.put("mensaje", "Contenido del mensaje");
-        model.put("listaClientes", listaClientes);
-        viewName = "holaHibernate";
 
         return new ModelAndView(viewName, model);
     }

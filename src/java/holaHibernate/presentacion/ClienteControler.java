@@ -8,16 +8,13 @@ package holaHibernate.presentacion;
 
 import holaHibernate.entidades.Cliente;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,15 +28,15 @@ public class ClienteControler {
     
     @Autowired
     SessionFactory sessionFactory;
-    
-    
+ 
+  
     @RequestMapping({"/Cliente/Nuevo"})
     public ModelAndView nuevo() {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
         
-        model.put("urlAction", "Guardar");
+        model.put("urlAction", "Guardar.html");
         //model.put("cliente", cliente);
         viewName = "frmCliente";
 
@@ -50,7 +47,7 @@ public class ClienteControler {
     //public ModelAndView Editar( @PathVariable( "dni" ) int dni) {
     
     @RequestMapping({"/Cliente/Editar"})
-    public ModelAndView editar( @RequestParam("dni") int dni) {
+    public ModelAndView editar( @RequestParam("id") int dni) {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
@@ -60,7 +57,7 @@ public class ClienteControler {
         Cliente cliente=(Cliente)session.get(Cliente.class,dni);
         session.getTransaction().commit();
         
-        model.put("urlAction", "Guardar.html");
+        model.put("urlAction", "Guardar.html?id="+dni);
         model.put("cliente", cliente);
         viewName = "frmCliente";
 
@@ -73,20 +70,28 @@ public class ClienteControler {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
-        
-        int dni = Integer.parseInt(request.getParameter("dni"));
-        
+        Cliente cliente;
+        String strId=request.getParameter("id");
         Session session=sessionFactory.openSession();
         
         session.beginTransaction();
-        Cliente cliente=(Cliente)session.get(Cliente.class,dni);
-        cliente.setNombre(request.getParameter("nombre"));
-        cliente.setApe1(request.getParameter("ape1"));
-        cliente.setApe2(request.getParameter("ape2"));
-        cliente.setNick(request.getParameter("nick"));
+        
+        if(strId!=null) { // si es una modificacion lo leemos primero
+            int id = Integer.parseInt(request.getParameter("id"));
+            cliente=(Cliente)session.get(Cliente.class,id);
+        } else { // si es nuevo creamos un cliente
+            cliente = new Cliente();
+        }
+        // actualizamos los datos del formulario en el Cliente
+        cliente.setDni(Integer.parseInt(request.getParameter("DNI")));
+        cliente.setNombre(request.getParameter("Nombre"));
+        cliente.setApe1(request.getParameter("Ape1"));
+        cliente.setApe2(request.getParameter("Ape2"));
+        cliente.setNick(request.getParameter("Nick"));
+        cliente.setPasswd(request.getParameter("Passwd"));
         
         try {
-            session.update(cliente);
+            session.saveOrUpdate(cliente);
             session.getTransaction().commit();
         
             model.put("mensaje", "Ok");
@@ -94,7 +99,7 @@ public class ClienteControler {
         } catch (Exception e)
         {
             session.getTransaction().rollback();
-            model.put("mensaje", "Error al guardar el cliente");
+            model.put("mensaje", "Error al guardar el cliente"+e.getMessage());
             model.put("cliente", cliente);
             viewName = "frmCliente";
         }

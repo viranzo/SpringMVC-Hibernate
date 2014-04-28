@@ -32,7 +32,7 @@
                 <c:forEach items="${listaClientes}" var="cli">
                     <tr>
                         <td class="num">
-                            <a href="${pageContext.request.contextPath}/Cliente/Editar.html?dni=${cli.dni}" 
+                            <a href="${pageContext.request.contextPath}/Cliente/Editar.html?id=${cli.dni}" 
                                />${cli.dni}</a>   
                         </td>
                         <td>${cli.nombre}</td>

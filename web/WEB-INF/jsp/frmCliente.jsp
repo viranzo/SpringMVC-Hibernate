@@ -20,20 +20,17 @@
                 <p>${mensaje}</p>
             <div>
             <label for="DNI">DNI:</label>
-            <input class="disabled" id="dni" name="dni" type="text" 
-                   value="${cliente.dni}" readonly="readonly">
-            <label for="nombre">Nombre:</label>
-            <input id="nombre" name="nombre" type="text"  
-                   value="${cliente.nombre}" >
-            <label for="ape1">Primer Apellido:</label>
-            <input id="ape1" type="text" name="ape1" 
-                   value="${cliente.ape1}" >
-            <label for="ape2">Segundo Apellido:</label>
-            <input id="ape2" type="text" name="ape2" 
-                   value="${cliente.ape2}" >
-            <label for="nick">Nick:</label>
-            <input id="nick" type="text" name="nick" 
-                   value="${cliente.nick}" >
+            <input id="dni" name="DNI" type="text" value="${cliente.dni}" >
+            <label for="Nombre">Nombre:</label>
+            <input id="nombre" name="Nombre" type="text" value="${cliente.nombre}" >
+            <label for="Ape1">Primer Apellido:</label>
+            <input id="ape1" type="text" name="Ape1" value="${cliente.ape1}" >
+            <label for="Ape2">Segundo Apellido:</label>
+            <input id="ape2" type="text" name="Ape2" value="${cliente.ape2}" >
+            <label for="Nick">Nick:</label>
+            <input id="nick" type="text" name="Nick" value="${cliente.nick}" >
+            <label for="Passwd">passwd:</label>
+            <input id="passwd" type="text" name="Passwd" value="${cliente.passwd}" >
             <div class="botones">
                 <input type="submit" value="Guardar">
                 <input type="button" value="Cancelar" 

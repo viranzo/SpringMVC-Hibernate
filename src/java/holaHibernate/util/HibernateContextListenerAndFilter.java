@@ -31,8 +31,8 @@ import javax.servlet.annotation.WebListener;
  *    HibernateUtil.closeSessionFactory()
  * Al inicio de la petición web se crea la sesión de Hibernate con la llamada a 
  *    HibernateUtil.openSessionAndAttachToThread()
- * Al finalizar la petición web se destruye la sesión de hibernate con la llamada a 
- *    HibernateUtil.closeSessionAndDeattachFromThread()
+ * Al finalizar la petición web se destruye la sesión de hibernate con la 
+ * llamada a HibernateUtil.closeSessionAndDeattachFromThread()
  */
 @WebListener()
 @WebFilter(urlPatterns = {"*.html"})
