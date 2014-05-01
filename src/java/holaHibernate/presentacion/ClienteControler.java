@@ -40,6 +40,7 @@ public class ClienteControler {
         return new ModelAndView(viewName, model);
     }
     
+    
     //@RequestMapping({"/ClienteEditar/{dni}"})
     //public ModelAndView Editar( @PathVariable( "dni" ) int dni) {
     
