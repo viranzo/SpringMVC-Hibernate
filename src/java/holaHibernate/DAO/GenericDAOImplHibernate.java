@@ -13,7 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Vicente
  */
-public class GenericDAOImplHibernate<T, ID extends Serializable> implements GenericDAO<T, ID> {
+public class GenericDAOImplHibernate<T, ID extends Serializable> 
+             implements GenericDAO<T, ID> {
 
     @Autowired
     SessionFactory sessionFactory;
