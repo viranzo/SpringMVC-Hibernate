@@ -21,8 +21,8 @@
              <div class="error">
                 <p>${mensaje}</p>
             <div>
-            <div >
-               <a id="btnNuevo" class="btn" href="Cliente/Nuevo.html">Nuevo Cliente</a>
+            <div>
+               <a id="btnNuevo" class="btn btn-primary" href="Cliente/Nuevo.html">Nuevo Cliente</a>
             </div>
             <table>
                 <tr>

@@ -12,7 +12,9 @@
         <title>Página de errores</title>
     </head>
     <body>
-        <h1>${mensaje}</h1>
-        <a href="/index.html">Volver al inicio</a>
+         <div class="error">
+             <p>${mensaje}</p>
+         <div>
+        <a href="${pageContext.request.contextPath}/index.html">Volver al inicio</a>
     </body>
 </html>

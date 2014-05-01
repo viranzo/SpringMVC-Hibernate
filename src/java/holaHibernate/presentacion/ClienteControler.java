@@ -58,58 +58,69 @@ public class ClienteControler {
             viewName = "frmCliente";
         } catch (Exception ex) {
             model.put("mensaje", "Eror al leer el cliente");
-            viewName = "redirect:/index.html";
+            viewName = "error";
         }
         return new ModelAndView(viewName, model);
     }
     
     @RequestMapping({"/Cliente/Guardar"})
-    public ModelAndView guardar(@RequestParam("id") String strId,
-                                @RequestParam("DNI") int dni,
-                                @RequestParam("Nombre") String nombre,
-                                @RequestParam("Ape1") String ape1,
-                                @RequestParam("Ape2") String ape2,
-                                @RequestParam("Nick") String nick,
-                                @RequestParam("Passwd") String passwd, 
-                                HttpServletRequest request, 
+    public ModelAndView guardar(HttpServletRequest request, 
                                 HttpServletResponse response    
                                 ) throws Exception  {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
-        Cliente cliente=null;
-               
+        Cliente cliente;
+        
+        String strId=request.getParameter("id");
         if(strId!=null) { // si es una modificacion 
             int id = Integer.parseInt(strId);
             try { // leemos los datos 
                 cliente=(Cliente)clienteDAO.read(id);
             } catch (Exception ex) {
                 model.put("mensaje", "Error de lectura del cliente");
-                viewName = "redirect:/index.html";
+                viewName = "error";
                 return new ModelAndView(viewName, model);
             }
         } else {
             // si es nuevo creamos un cliente
             cliente = clienteDAO.create();
         }
-        // actualizamos con los datos del formulario en el Cliente
-        cliente.setDni(dni);
-        cliente.setNombre(nombre);
-        cliente.setApe1(ape1);
-        cliente.setApe2(ape2);
-        cliente.setNick(nick);
-        cliente.setPasswd(passwd);
-        
-        try {
+       
+               
+        try { // actualizamos con los datos del formulario en el Cliente
+            cliente.setDni(Integer.parseInt(request.getParameter("DNI")));
+            cliente.setNombre(request.getParameter("Nombre"));
+            cliente.setApe1(request.getParameter("Ape1"));
+            cliente.setApe2(request.getParameter("Ape2"));
+            cliente.setNick(request.getParameter("Nick"));
+            cliente.setPasswd(request.getParameter("Passwd"));
+            
             clienteDAO.update(cliente);
-            model.put("mensaje", "Ok");
             viewName = "redirect:/index.html";
         } catch (Exception e)
         {
-            model.put("mensaje", "Error al guardar el cliente"+e.getMessage());
+            model.put("mensaje", "Error al guardar el cliente:<br/>"+e.getMessage());
             model.put("cliente", cliente);
             viewName = "frmCliente";
         }
         return new ModelAndView(viewName, model);
     }
+    @RequestMapping({"/Cliente/Eliminar"})
+    public ModelAndView eliminar( @RequestParam("id") int dni) {
+        
+        Map<String, Object> model = new HashMap<>();
+        String viewName;
+      
+        Cliente cliente;
+        try {
+            clienteDAO.delete(dni);
+            viewName = "redirect:/index.html";
+        } catch (Exception ex) {
+            model.put("mensaje", "Eror al borrar el cliente:<br/>" + ex.getMessage());
+            viewName = "error";
+        }
+        return new ModelAndView(viewName, model);
+    }
+    
 }

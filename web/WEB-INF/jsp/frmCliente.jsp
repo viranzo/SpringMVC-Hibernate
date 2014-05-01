@@ -3,7 +3,7 @@
     Created on : 27-abr-2014, 18:39:55
     Author     : Vicente
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,8 +32,12 @@
             <label for="Passwd">passwd:</label>
             <input id="passwd" type="text" name="Passwd" value="${cliente.passwd}" >
             <div class="botones">
-                <input type="submit" value="Guardar">
-                <input type="button" value="Cancelar" 
+                <c:if test="${cliente.dni !=null}" >
+                    <input class="btn btn-primary" type="button" value="Eliminar"
+                           onclick="location.href='Eliminar.html?id=${cliente.dni}'">
+                </c:if>    
+                <input class="btn btn-primary" type="submit" value="Guardar">
+                <input class="btn btn-primary" type="button" value="Cancelar" 
                        onclick="location.href='${pageContext.request.contextPath}/index.html'">
             </div>
      </form>
