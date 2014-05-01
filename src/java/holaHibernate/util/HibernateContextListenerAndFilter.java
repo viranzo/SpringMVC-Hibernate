@@ -18,21 +18,25 @@ import javax.servlet.annotation.WebListener;
 
 /**
  *
- * @author Lorenzo González
- * http://cursohibernate.es/doku.php?id=unidades:08_spring:03_spring_mvc
  * 
  * Esta clase se ejecutará al inicio y final de la aplicación y en cada petición 
  * web cuya URL tenga el patrón ”*.html”.Para conseguirlo se han añadido 
  * anotaciones de Java EE 6 Web @WebListener y @WebFilter
  * 
- * Al inicio de la aplicación web se inicializa Hibernate con la llamada a 
+ * contextInitialized
+ *    Al inicio de la aplicación web se inicializa Hibernate con la llamada a 
  *    HibernateUtil.buildSessionFactory()
- * Al finalizar la aplicación web se cierra Hibernate con la llamada a 
+ * 
+ * contextDestroyed
+ *    Al finalizar la aplicación web se cierra Hibernate con la llamada a 
  *    HibernateUtil.closeSessionFactory()
- * Al inicio de la petición web se crea la sesión de Hibernate con la llamada a 
- *    HibernateUtil.openSessionAndAttachToThread()
- * Al finalizar la petición web se destruye la sesión de hibernate con la 
- * llamada a HibernateUtil.closeSessionAndDeattachFromThread()
+ * 
+ * doFilter try
+ *    Al inicio de la petición web se crea la sesión de Hibernate con la llamada
+ *    a HibernateUtil.openSessionAndAttachToThread()
+ * doFilter finally
+ *    Al finalizar la petición web se destruye la sesión de hibernate con la 
+ *    llamada a HibernateUtil.closeSessionAndDeattachFromThread()
  */
 @WebListener()
 @WebFilter(urlPatterns = {"*.html"})
