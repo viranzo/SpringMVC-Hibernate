@@ -23,8 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RootControler {
     
-     @Autowired
-     ClienteDAO clienteDAO;
+    @Autowired
+    ClienteDAO clienteDAO;
     
     @RequestMapping({"/index.html"})
     public ModelAndView listaClientes(HttpServletRequest request, 
@@ -32,7 +32,6 @@ public class RootControler {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
-        
         
         try {
             model.put("listaClientes", clienteDAO.findAll());

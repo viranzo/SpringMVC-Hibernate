@@ -10,7 +10,8 @@ import holaHibernate.DAO.ClienteDAO;
 import holaHibernate.entidades.Cliente;
 import java.util.HashMap;
 import java.util.Map;
-import org.hibernate.SessionFactory;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,8 +69,10 @@ public class ClienteControler {
                                 @RequestParam("Ape1") String ape1,
                                 @RequestParam("Ape2") String ape2,
                                 @RequestParam("Nick") String nick,
-                                @RequestParam("Passwd") String passwd ) 
-                                    throws Exception  {
+                                @RequestParam("Passwd") String passwd, 
+                                HttpServletRequest request, 
+                                HttpServletResponse response    
+                                ) throws Exception  {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
