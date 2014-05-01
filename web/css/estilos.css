@@ -44,3 +44,8 @@ input[type="text"] { width: 65%;}
     background-color: #cccccc;
 }
 .error p { color: red;}
+
+.btn {
+    border: 1px solid buttonface;
+    background: bottom;
+}

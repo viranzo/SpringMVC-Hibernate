@@ -1,5 +1,6 @@
 package holaHibernate.util;
 
+import javax.annotation.Resource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

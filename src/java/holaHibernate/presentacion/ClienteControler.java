@@ -6,12 +6,10 @@
 
 package holaHibernate.presentacion;
 
+import holaHibernate.DAO.ClienteDAO;
 import holaHibernate.entidades.Cliente;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ClienteControler {
     
     @Autowired
-    SessionFactory sessionFactory;
- 
+    ClienteDAO clienteDAO;
   
     @RequestMapping({"/Cliente/Nuevo"})
     public ModelAndView nuevo() {
@@ -37,7 +34,6 @@ public class ClienteControler {
         String viewName;
         
         model.put("urlAction", "Guardar.html");
-        //model.put("cliente", cliente);
         viewName = "frmCliente";
 
         return new ModelAndView(viewName, model);
@@ -51,54 +47,61 @@ public class ClienteControler {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
-
-        Session session=sessionFactory.openSession();
-        session.beginTransaction();
-        Cliente cliente=(Cliente)session.get(Cliente.class,dni);
-        session.getTransaction().commit();
-        
-        model.put("urlAction", "Guardar.html?id="+dni);
-        model.put("cliente", cliente);
-        viewName = "frmCliente";
-
+      
+        Cliente cliente;
+        try {
+            cliente = clienteDAO.read(dni);
+            model.put("urlAction", "Guardar.html?id="+dni);
+            model.put("cliente", cliente);
+            viewName = "frmCliente";
+        } catch (Exception ex) {
+            model.put("mensaje", "Eror al leer el cliente");
+            viewName = "redirect:/index.html";
+        }
         return new ModelAndView(viewName, model);
     }
     
     @RequestMapping({"/Cliente/Guardar"})
-    public ModelAndView guardar(HttpServletRequest request, 
-                                HttpServletResponse response) {
+    public ModelAndView guardar(@RequestParam("id") String strId,
+                                @RequestParam("DNI") int dni,
+                                @RequestParam("Nombre") String nombre,
+                                @RequestParam("Ape1") String ape1,
+                                @RequestParam("Ape2") String ape2,
+                                @RequestParam("Nick") String nick,
+                                @RequestParam("Passwd") String passwd ) 
+                                    throws Exception  {
         
         Map<String, Object> model = new HashMap<>();
         String viewName;
-        Cliente cliente;
-        String strId=request.getParameter("id");
-        Session session=sessionFactory.openSession();
-        
-        session.beginTransaction();
-        
-        if(strId!=null) { // si es una modificacion lo leemos primero
-            int id = Integer.parseInt(request.getParameter("id"));
-            cliente=(Cliente)session.get(Cliente.class,id);
-        } else { // si es nuevo creamos un cliente
-            cliente = new Cliente();
+        Cliente cliente=null;
+               
+        if(strId!=null) { // si es una modificacion 
+            int id = Integer.parseInt(strId);
+            try { // leemos los datos 
+                cliente=(Cliente)clienteDAO.read(id);
+            } catch (Exception ex) {
+                model.put("mensaje", "Error de lectura del cliente");
+                viewName = "redirect:/index.html";
+                return new ModelAndView(viewName, model);
+            }
+        } else {
+            // si es nuevo creamos un cliente
+            cliente = clienteDAO.create();
         }
-        // actualizamos los datos del formulario en el Cliente
-        cliente.setDni(Integer.parseInt(request.getParameter("DNI")));
-        cliente.setNombre(request.getParameter("Nombre"));
-        cliente.setApe1(request.getParameter("Ape1"));
-        cliente.setApe2(request.getParameter("Ape2"));
-        cliente.setNick(request.getParameter("Nick"));
-        cliente.setPasswd(request.getParameter("Passwd"));
+        // actualizamos con los datos del formulario en el Cliente
+        cliente.setDni(dni);
+        cliente.setNombre(nombre);
+        cliente.setApe1(ape1);
+        cliente.setApe2(ape2);
+        cliente.setNick(nick);
+        cliente.setPasswd(passwd);
         
         try {
-            session.saveOrUpdate(cliente);
-            session.getTransaction().commit();
-        
+            clienteDAO.update(cliente);
             model.put("mensaje", "Ok");
             viewName = "redirect:/index.html";
         } catch (Exception e)
         {
-            session.getTransaction().rollback();
             model.put("mensaje", "Error al guardar el cliente"+e.getMessage());
             model.put("cliente", cliente);
             viewName = "frmCliente";

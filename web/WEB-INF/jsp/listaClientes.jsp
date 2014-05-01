@@ -18,8 +18,11 @@
     <body>
         <div class="wrapper">
             <h1>Listado de clientes</h1>
+             <div class="error">
+                <p>${mensaje}</p>
+            <div>
             <div >
-               <a id="btnNuevo" href="Cliente/Nuevo.html">Nuevo Cliente</a>
+               <a id="btnNuevo" class="btn" href="Cliente/Nuevo.html">Nuevo Cliente</a>
             </div>
             <table>
                 <tr>
