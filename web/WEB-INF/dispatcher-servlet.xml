@@ -14,7 +14,14 @@
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
+    <!--    Esta etiqueta registra los beans DefaultAnnotationHandlerMapping y 
+          AnnotationMethodHandlerAdapter que requiere Spring MVC para enviar 
+          solicitudes a @ Controllers. 
+            La etiqueta configura esos dos beans con los parámetros por defecto 
+          basados ​​en lo que está presente en su ruta de clase. 
+    -->      
     <mvc:annotation-driven/>
+    
     <!-- buscar los controladores @Controler y los urlmapper @RequestMapping -->
     <context:component-scan 
         base-package="holaHibernate.presentacion" />

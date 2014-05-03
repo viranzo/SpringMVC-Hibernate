@@ -17,13 +17,12 @@
 
     <!--Permite usar entre otras la anotación @Autowired -->
     <context:annotation-config/>
-    <!--Permite usar entre otras las anotaciones @Component y @Controller -->
-    <context:component-scan base-package="holaHibernate"/>
+    <!--Permite usar entre otras las anotaciones 
+        @Component y @Controller @Repository-->
+    <context:component-scan 
+        base-package="holaHibernate"/>
 
     <bean class="holaHibernate.util.HibernateUtil" 
-          factory-method="getSessionFactory"  />
+        factory-method="getSessionFactory"  />
     
-    
-    
-
-</beans>
+ </beans>
