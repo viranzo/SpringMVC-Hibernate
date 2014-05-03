@@ -15,14 +15,13 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!--Permite usar entre otras la anotación @Autowired -->
+    <!--Permite usar la anotación @Autowired -->
     <context:annotation-config/>
-    <!--Permite usar entre otras las anotaciones 
-        @Component y @Controller @Repository-->
+    <!--Permite usar @Component y @Controller @Repository-->
     <context:component-scan 
         base-package="holaHibernate"/>
 
     <bean class="holaHibernate.util.HibernateUtil" 
-        factory-method="getSessionFactory"  />
-    
+        factory-method="getSessionFactory"  
+    />
  </beans>
