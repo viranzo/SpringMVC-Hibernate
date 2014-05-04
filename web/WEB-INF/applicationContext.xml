@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!--Permite usar la anotación @Autowired -->
+    <!-- Permite usar @Autowired and @Configuration -->
     <context:annotation-config/>
     <!--Permite usar @Component y @Controller @Repository-->
     <context:component-scan 
