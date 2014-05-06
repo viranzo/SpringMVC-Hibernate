@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de clientes utilizando EL y JSTL</title>
+        <title>Listado de clientes</title>
         <link href="css/estilos.css" rel="stylesheet">
     </head>
     <body>
@@ -22,7 +22,8 @@
                 <p>${mensaje}</p>
             <div>
             <div>
-               <a id="btnNuevo" class="btn btn-primary" href="Cliente/Nuevo.html">Nuevo Cliente</a>
+               <a id="btnNuevo" class="btn btn-primary" 
+                  href="Cliente/Nuevo.html">Nuevo Cliente</a>
             </div>
             <table>
                 <tr>

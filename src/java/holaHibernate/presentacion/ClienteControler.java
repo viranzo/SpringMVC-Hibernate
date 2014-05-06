@@ -23,12 +23,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Vicente
  */
 @Controller
+@RequestMapping({"/Cliente"})
 public class ClienteControler {
     
     @Autowired
     ClienteDAO clienteDAO;
   
-    @RequestMapping({"/Cliente/Nuevo"})
+    @RequestMapping({"/Nuevo"})
     public ModelAndView nuevo() {
         
         Map<String, Object> model = new HashMap<>();
@@ -44,7 +45,7 @@ public class ClienteControler {
     //@RequestMapping({"/ClienteEditar/{dni}"})
     //public ModelAndView Editar( @PathVariable( "dni" ) int dni) {
     
-    @RequestMapping({"/Cliente/Editar"})
+    @RequestMapping({"/Editar"})
     public ModelAndView editar( @RequestParam("id") int dni) {
         
         Map<String, Object> model = new HashMap<>();
@@ -63,7 +64,7 @@ public class ClienteControler {
         return new ModelAndView(viewName, model);
     }
     
-    @RequestMapping({"/Cliente/Guardar"})
+    @RequestMapping({"/Guardar"})
     public ModelAndView guardar(HttpServletRequest request, 
                                 HttpServletResponse response    
                                 ) throws Exception  {
@@ -106,7 +107,7 @@ public class ClienteControler {
         }
         return new ModelAndView(viewName, model);
     }
-    @RequestMapping({"/Cliente/Eliminar"})
+    @RequestMapping({"/Eliminar"})
     public ModelAndView eliminar( @RequestParam("id") int dni) {
         
         Map<String, Object> model = new HashMap<>();
