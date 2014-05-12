@@ -1,4 +1,3 @@
-
 package holaHibernate.DAO;
 
 import java.io.Serializable;
@@ -10,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
  * @author Vicente
  */
 public class GenericDAOImplHibernate<T, ID extends Serializable> 
@@ -25,7 +23,6 @@ public class GenericDAOImplHibernate<T, ID extends Serializable>
         return (Class<T>) ((ParameterizedType) 
                 getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
-
     @Override
     public T create() throws InstantiationException, IllegalAccessException {
        return getEntityClass().newInstance();
@@ -69,6 +66,4 @@ public class GenericDAOImplHibernate<T, ID extends Serializable>
         session.getTransaction().commit();
         return entities;
     }
-
 }
-

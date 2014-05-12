@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package holaHibernate.presentacion;
 
 import holaHibernate.DAO.ClienteDAO;
@@ -41,7 +35,6 @@ public class ClienteControler {
         return new ModelAndView(viewName, model);
     }
     
-    
     //@RequestMapping({"/ClienteEditar/{dni}"})
     //public ModelAndView Editar( @PathVariable( "dni" ) int dni) {
     
@@ -54,9 +47,16 @@ public class ClienteControler {
         Cliente cliente;
         try {
             cliente = clienteDAO.read(dni);
-            model.put("urlAction", "Guardar.html?id="+dni);
-            model.put("cliente", cliente);
-            viewName = "frmCliente";
+            if (cliente!=null) {
+                model.put("urlAction", "Guardar.html?id="+dni);
+                model.put("cliente", cliente);
+                viewName = "frmCliente";
+            }
+            else {
+                 model.put("mensaje", "Eror al leer el cliente");
+                 viewName = "error";
+            }
+                
         } catch (Exception ex) {
             model.put("mensaje", "Eror al leer el cliente");
             viewName = "error";
@@ -118,7 +118,7 @@ public class ClienteControler {
             clienteDAO.delete(dni);
             viewName = "redirect:/index.html";
         } catch (Exception ex) {
-            model.put("mensaje", "Eror al borrar el cliente:<br/>" + ex.getMessage());
+            model.put("mensaje", "Error al borrar el cliente:<br/>" + ex.getMessage());
             viewName = "error";
         }
         return new ModelAndView(viewName, model);

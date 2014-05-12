@@ -9,12 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Página de errores</title>
+        <link href="${pageContext.request.contextPath}/css/estilos.css" rel="stylesheet">
+        <title>Página de error</title>
     </head>
     <body>
-         <div class="error">
-             <p>${mensaje}</p>
-         <div>
-        <a href="${pageContext.request.contextPath}/index.html">Volver al inicio</a>
+        <div class="error wrapper">
+            <p>${mensaje}</p>
+            <div>
+                <a class="btn btn-primary" 
+                   href="${pageContext.request.contextPath}/index.html">Volver al Inicio</a>
+            </div>
+        </div>
     </body>
 </html>

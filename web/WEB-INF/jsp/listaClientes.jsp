@@ -19,6 +19,7 @@
         <div class="wrapper">
             <h1>Listado de clientes</h1>
              <div class="error">
+                 <p>${pageContext.request.contextPath}</p> 
                 <p>${mensaje}</p>
             <div>
             <div>
@@ -36,7 +37,7 @@
                 <c:forEach items="${listaClientes}" var="cli">
                     <tr>
                         <td class="num">
-                            <a href="${pageContext.request.contextPath}/Cliente/Editar.html?id=${cli.dni}" 
+                            <a href="Cliente/Editar.html?id=${cli.dni}" 
                                />${cli.dni}</a>   
                         </td>
                         <td>${cli.nombre}</td>

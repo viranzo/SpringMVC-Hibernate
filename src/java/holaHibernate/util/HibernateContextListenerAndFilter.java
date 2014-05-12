@@ -17,7 +17,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebListener;
 
 /**
- *
  * 
  * Esta clase se ejecutará al inicio y final de la aplicación y en cada petición 
  * web cuya URL tenga el patrón ”*.html”.Para conseguirlo se han añadido 
