@@ -123,5 +123,4 @@ public class ClienteControler {
         }
         return new ModelAndView(viewName, model);
     }
-    
 }
