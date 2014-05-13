@@ -33,6 +33,9 @@ public class GenericDAOImplHibernate<T, ID extends Serializable>
         
         session.beginTransaction();
         T entity = (T) session.get(getEntityClass(), id);
+        if (entity == null) {
+            throw new Exception("Los datos a ya no existen");
+        }
         session.getTransaction().commit();
         return entity;
     }

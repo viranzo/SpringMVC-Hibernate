@@ -47,18 +47,11 @@ public class ClienteControler {
         Cliente cliente;
         try {
             cliente = clienteDAO.read(dni);
-            if (cliente!=null) {
-                model.put("urlAction", "Guardar.html?id="+dni);
-                model.put("cliente", cliente);
-                viewName = "frmCliente";
-            }
-            else {
-                 model.put("mensaje", "Eror al leer el cliente");
-                 viewName = "error";
-            }
-                
+            model.put("urlAction", "Guardar.html?id="+dni);
+            model.put("cliente", cliente);
+            viewName = "frmCliente";
         } catch (Exception ex) {
-            model.put("mensaje", "Eror al leer el cliente");
+            model.put("mensaje", "Error al leer el cliente");
             viewName = "error";
         }
         return new ModelAndView(viewName, model);
